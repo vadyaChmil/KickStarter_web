@@ -43,7 +43,7 @@ public class DonateServlet extends HttpKickStarter {
 				request.getRequestDispatcher(DONATION_PAGE).forward(request, response);
 			} else {
 				int money = Integer.valueOf(request.getParameter("money"));
-				projectDao.setCurrentMoney(money / 100 + project.getCurrentMoney(), project.getId());
+				projectDao.setCurrentMoney(money + project.getCurrentMoney(), project.getId());
 				project = projectDao.getProject(project.getId());
 				request.getSession().setAttribute(PROJECT, project);
 				request.getRequestDispatcher(PROJECT_PAGE).forward(request, response);

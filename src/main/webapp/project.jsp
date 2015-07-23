@@ -32,18 +32,15 @@
 		<tr>
 			<td colspan="2">
 				<ul type="circle">
-					<li><h4>
-							<a href="project?id=${project.id}"> <c:out
-									value="${project.name}" /></a>
-						</h4></li>
+					<li>
+						<h4><a href="project?id=${project.id}">${project.name}</a></h4>
+					</li>
 				</ul>
 				<p>
-					Project needs <font color="sky blue"><b><c:out
-								value="${project.needMoney/100}" /></b></font> dollars
+					Project needs <font color="sky blue"><b>${project.needMoney/100}</b></font> dollars
 				</p>
 				<p>
-					Project has <font color="sky blue"><b>${project.currentMoney}</b></font>
-					dollars
+					Project has <font color="sky blue"><b>${project.currentMoney/100}</b></font> dollars
 				</p>
 				<p>
 					Days to go - <font color="sky blue"><b>${project.daysLeft}</b></font>
