@@ -13,6 +13,12 @@
 
 	<table width="80%" height="150" border="0" align="center">
 		<tr>
+			<th align="left" width="20%">
+				<h4>
+					<a href="https://github.com/vadyaChmil/KickStarter_web"
+						target="_blank" title="GitHub source"> GitHub source</a>
+				</h4>
+			</th>
 			<th align="right">
 				<h3>
 					<em>${quote.quote}</em>
@@ -23,13 +29,13 @@
 			</th>
 		</tr>
 		<tr>
-			<td>
-				<c:forEach items="${categories}" var="category">
+			<td colspan="2"><c:forEach items="${categories}" var="category">
 					<ul type="circle">
-						<li><h4><a href="category?id=${category.id}">${category.name}</a></h4></li>
+						<li><h4>
+								<a href="category?id=${category.id}">${category.name}</a>
+							</h4></li>
 					</ul>
-				</c:forEach>
-			</td>
+				</c:forEach></td>
 		</tr>
 	</table>
 
