@@ -2,7 +2,6 @@ package com.rhcloud.vadyazakusylo.servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.rhcloud.vadyazakusylo.dao.ProjectDao;
-import com.rhcloud.vadyazakusylo.dao.QuotesDao;
 import com.rhcloud.vadyazakusylo.dao_sql.ProjectDaoMySql;
-import com.rhcloud.vadyazakusylo.dao_sql.QuotesDaoMySql;
 import com.rhcloud.vadyazakusylo.entity.Quote;
 import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
 

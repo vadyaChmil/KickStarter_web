@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.rhcloud.vadyazakusylo.dao.CategoriesDao;
-import com.rhcloud.vadyazakusylo.dao.QuotesDao;
 import com.rhcloud.vadyazakusylo.dao_sql.CategoriesDaoMySql;
-import com.rhcloud.vadyazakusylo.dao_sql.QuotesDaoMySql;
 import com.rhcloud.vadyazakusylo.entity.Category;
 import com.rhcloud.vadyazakusylo.entity.Quote;
 

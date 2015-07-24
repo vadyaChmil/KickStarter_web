@@ -2,13 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.rhcloud.vadya_zakusylo</groupId>
-	<artifactId>KickStarter_Spring</artifactId>
+	<groupId>com.rhcloud.vadyazakusylo</groupId>
+	<artifactId>KickStarter4_0</artifactId>
 	<version>0.1</version>
 
+	<packaging>war</packaging>
 	<name>kickstarter</name>
 	<description>kickstarter</description>
-	<packaging>war</packaging>
 
 	<properties>
 		<jdk.version>1.7</jdk.version>

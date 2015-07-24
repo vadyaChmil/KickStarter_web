@@ -26,9 +26,7 @@ public abstract class HttpKickStarter extends HttpServlet {
 	static final String CONNECTION = "connection";
 	static final String QUOTE = "quote";
 	static final String CATEGORIES = "categories";
-	static final String CATEGORY_NAME = "category";
 	static final String PROJECTS = "projects";
-	static final String PROJECT_NAME = "project";
 	static final String PROJECT = "project";
 	static final String DONATIONS = "donations";
 	static final String ERROR_MESSAGE = "errorMessage";
