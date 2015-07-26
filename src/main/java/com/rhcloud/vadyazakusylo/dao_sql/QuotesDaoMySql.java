@@ -7,20 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.rhcloud.vadyazakusylo.dao.QuotesDao;
 import com.rhcloud.vadyazakusylo.entity.Quote;
 import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
 
-public class QuotesDaoMySql implements QuotesDao {
-	Connection connection;
+@Component
+public class QuotesDaoMySql extends AbstractDao implements QuotesDao {
 
-	public QuotesDaoMySql(Connection connection) {
-		super();
-		this.connection = connection;
-	}
-
+	@Override
 	public List<Quote> getQuotesList() throws SqlConnectionException {
-		try {
+		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectQuotes());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			List<Quote> quotes = new ArrayList<Quote>();

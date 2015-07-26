@@ -7,19 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.rhcloud.vadyazakusylo.dao.ProjectsDao;
 import com.rhcloud.vadyazakusylo.entity.Project;
 import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
 
-public class ProjectsDaoMySql implements ProjectsDao {
-	Connection connection;
+@Component
+public class ProjectsDaoMySql extends AbstractDao implements ProjectsDao {
 
-	public ProjectsDaoMySql(Connection connection) {
-		this.connection = connection;
-	}
-
+	@Override
 	public List<Project> getProjectsList(int categoryId) throws SqlConnectionException {
-		try {
+		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectProjects());
 			preparedStatement.setInt(1, categoryId);
 			ResultSet resultSet = preparedStatement.executeQuery();

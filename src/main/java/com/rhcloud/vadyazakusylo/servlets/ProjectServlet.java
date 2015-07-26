@@ -1,14 +1,11 @@
 package com.rhcloud.vadyazakusylo.servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rhcloud.vadyazakusylo.dao.ProjectDao;
-import com.rhcloud.vadyazakusylo.dao_sql.ProjectDaoMySql;
 import com.rhcloud.vadyazakusylo.entity.Project;
 import com.rhcloud.vadyazakusylo.entity.Quote;
 import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
@@ -24,13 +21,9 @@ public class ProjectServlet extends HttpKickStarter {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			Connection connection = getConnection(request);
-			
-			Quote quote = getQuote(connection);
+			Quote quote = getQuote();
 			request.setAttribute(QUOTE, quote);
-			
-			ProjectDao projectDao = new ProjectDaoMySql(connection);
-			
+
 			String text = request.getParameter("text");
 			if (text == null) {
 				int projectId = Integer.valueOf(request.getParameter("id"));

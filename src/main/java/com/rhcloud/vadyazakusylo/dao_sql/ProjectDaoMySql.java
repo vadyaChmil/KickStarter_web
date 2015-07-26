@@ -7,19 +7,18 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.springframework.stereotype.Component;
+
 import com.rhcloud.vadyazakusylo.dao.ProjectDao;
 import com.rhcloud.vadyazakusylo.entity.Project;
 import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
 
-public class ProjectDaoMySql implements ProjectDao {
-	private Connection connection;
+@Component
+public class ProjectDaoMySql extends AbstractDao implements ProjectDao {
 
-	public ProjectDaoMySql(Connection connection) {
-		this.connection = connection;
-	}
-
+	@Override
 	public Project getProject(int projectId) throws SqlConnectionException {
-		try {
+		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectProject());
 			preparedStatement.setInt(1, projectId);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -54,7 +53,7 @@ public class ProjectDaoMySql implements ProjectDao {
 
 	private Map<String, String> getQuestionsMap(int projectId) throws SqlConnectionException {
 		Map<String, String> questions = new TreeMap<String, String>();
-		try {
+		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectQuestions());
 			preparedStatement.setInt(1, projectId);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -79,9 +78,10 @@ public class ProjectDaoMySql implements ProjectDao {
 		return sql.toString();
 	}
 
+	@Override
 	public Map<Integer, String> getDonatios(int projectId) throws SqlConnectionException {
 		Map<Integer, String> donations = new TreeMap<Integer, String>();
-		try {
+		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectDonations());
 			preparedStatement.setInt(1, projectId);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -107,7 +107,7 @@ public class ProjectDaoMySql implements ProjectDao {
 	}
 
 	public double getCurrenMoney(int projectId) throws SqlConnectionException {
-		try {
+		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectCurrentMoney());
 			preparedStatement.setInt(1, projectId);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -124,8 +124,9 @@ public class ProjectDaoMySql implements ProjectDao {
 		return sql.toString();
 	}
 
+	@Override
 	public void setCurrentMoney(int money, int projectId) throws SqlConnectionException {
-		try {
+		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(updateCurrentMoney());
 			preparedStatement.setInt(1, money);
 			preparedStatement.setInt(2, projectId);
@@ -143,8 +144,9 @@ public class ProjectDaoMySql implements ProjectDao {
 		return sql.toString();
 	}
 
+	@Override
 	public void setQuestion(String question, int projectId) throws SqlConnectionException {
-		try {
+		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(insertQuestion());
 			preparedStatement.setString(1, question);
 			preparedStatement.setInt(2, projectId);

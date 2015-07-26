@@ -1,15 +1,12 @@
 package com.rhcloud.vadyazakusylo.servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rhcloud.vadyazakusylo.dao.ProjectDao;
-import com.rhcloud.vadyazakusylo.dao_sql.ProjectDaoMySql;
 import com.rhcloud.vadyazakusylo.entity.Project;
 import com.rhcloud.vadyazakusylo.entity.Quote;
 import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
@@ -25,12 +22,9 @@ public class DonateServlet extends HttpKickStarter {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			Connection connection = getConnection(request);
-
-			Quote quote = getQuote(connection);
+			Quote quote = getQuote();
 			request.setAttribute(QUOTE, quote);
 
-			ProjectDao projectDao = new ProjectDaoMySql(connection);
 			Project project = (Project) request.getSession().getAttribute(PROJECT);
 
 			if (request.getParameter("money") == "") {

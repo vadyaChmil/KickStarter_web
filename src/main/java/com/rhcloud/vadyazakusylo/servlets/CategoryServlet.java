@@ -1,15 +1,12 @@
 package com.rhcloud.vadyazakusylo.servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rhcloud.vadyazakusylo.dao.ProjectsDao;
-import com.rhcloud.vadyazakusylo.dao_sql.ProjectsDaoMySql;
 import com.rhcloud.vadyazakusylo.entity.Project;
 import com.rhcloud.vadyazakusylo.entity.Quote;
 import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
@@ -25,12 +22,9 @@ public class CategoryServlet extends HttpKickStarter {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			Connection connection = getConnection(request);
-
-			Quote quote = getQuote(connection);
+			Quote quote = getQuote();
 			request.setAttribute(QUOTE, quote);
 
-			ProjectsDao projectsDao = new ProjectsDaoMySql(connection);
 			int categoryId = Integer.valueOf(request.getParameter("id"));
 			List<Project> projects = projectsDao.getProjectsList(categoryId);
 			request.setAttribute(PROJECTS, projects);

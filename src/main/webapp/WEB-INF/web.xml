@@ -1,33 +1,50 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xmlns:web="http://java.sun.com/xml/ns/javaee"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+						http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
-
+	
 	<display-name>KickStarter</display-name>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:application-context.xml</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
 
-	<!-- servlets -->
 	<servlet>
 		<servlet-name>HomePage</servlet-name>
-		<servlet-class>com.rhcloud.vadyazakusylo.servlets.HomePageServlet</servlet-class>
+		<servlet-class>com.rhcloud.vadyazakusylo.servlets.HomePageServlet
+		</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>Category</servlet-name>
-		<servlet-class>com.rhcloud.vadyazakusylo.servlets.CategoryServlet</servlet-class>
+		<servlet-class>com.rhcloud.vadyazakusylo.servlets.CategoryServlet
+		</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>Project</servlet-name>
-		<servlet-class>com.rhcloud.vadyazakusylo.servlets.ProjectServlet</servlet-class>
+		<servlet-class>com.rhcloud.vadyazakusylo.servlets.ProjectServlet
+		</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>Donation</servlet-name>
-		<servlet-class>com.rhcloud.vadyazakusylo.servlets.DonationServlet</servlet-class>
+		<servlet-class>com.rhcloud.vadyazakusylo.servlets.DonationServlet
+		</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>Donate</servlet-name>
-		<servlet-class>com.rhcloud.vadyazakusylo.servlets.DonateServlet</servlet-class>
+		<servlet-class>com.rhcloud.vadyazakusylo.servlets.DonateServlet
+		</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>HomePage</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -56,12 +73,11 @@
 		<servlet-name>Donate</servlet-name>
 		<url-pattern>/donate</url-pattern>
 	</servlet-mapping>
-	
+
 	<session-config>
 		<session-timeout>20</session-timeout>
 	</session-config>
 
-	<!-- Define an error handler for 404 pages -->
 	<error-page>
 		<error-code>404</error-code>
 		<location>/error404.jsp</location>
