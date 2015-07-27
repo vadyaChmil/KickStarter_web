@@ -5,7 +5,7 @@
 <title>Error page 404</title>
 </head>
 
-<body>
+<body background="images/background.png">
 	<table width="100%" height="100%" border="0">
 		<tr align="center">
 			<td>

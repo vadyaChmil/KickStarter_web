@@ -9,15 +9,15 @@
 <title>Home page</title>
 </head>
 
-<body>
+<body background="images/background.png" >
 
 	<table width="80%" height="150" border="0" align="center">
 		<tr>
 			<th align="left" width="20%">
 				<h4>
-					<a href="home">Home</a>
+					<a href="index.html">Home</a>
 					 / 
-					<a href="home">Back</a>
+					<a href="categories">Back</a>
 				</h4>
 			</th>
 			<th align="right">

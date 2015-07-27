@@ -9,13 +9,13 @@
 <title>Home page</title>
 </head>
 
-<body>
+<body background="images/background.png">
 
 	<table width="80%" height="150" border="0" align="center">
 		<tr>
 			<th align="left" width="20%">
 				<h4>
-					<a href="home">Home</a>
+					<a href="index.html">Home</a>
 					 / 
 					<a href="project?id=${projectId}">Back</a>
 				</h4>

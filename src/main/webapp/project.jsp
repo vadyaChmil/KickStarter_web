@@ -9,15 +9,17 @@
 <title>Home page</title>
 </head>
 
-<body>
+<body background="images/background.png">
 
 	<table width="80%" height="150" border="0" align="center">
 		<tr>
 			<th align="left" width="20%">
 				<h4>
-					<a href="home">Home</a> / <a
-						href="category?id=${project.categoryId}">Back</a> / <a
-						href="donation?id=${project.id}">Donation</a>
+					<a href="index.html">Home</a>
+					 / 
+					<a href="category?id=${project.categoryId}">Back</a>
+					 / 
+					<a href="donation?id=${project.id}">Donation</a>
 				</h4>
 			</th>
 			<th align="right">
@@ -55,20 +57,22 @@
 					<a href="${project.urlVideo}" target="youtube"><em>Video</em></a>
 				</p>
 			</td>
-		</tr>
+		</tr>	
+	</table>
+	<table width="80%" height="150" border="0" align="center">
 		<c:if test='${not empty project.questions}'>
-			<tr align="left">
-				<td width="50%"><h4>
+			<tr>
+				<td align="left" width="50%"><h4>
 						<font color="sky blue"><em>Question</em></font>
 					</h4></td>
-				<td width="50%"><h4>
+				<td align="left" width="50%"><h4>
 						<font color="sky blue"><em>Answer</em></font>
 					</h4></td>
 			</tr>
 			<c:forEach var="questions" items="${project.questions}">
 				<tr>
-					<td width="50%" align="left"><em>${questions.key}</em></td>
-					<td width="50%" align="left"><em>${questions.value}</em></td>
+					<td align="left" width="50%"><em>${questions.key}</em></td>
+					<td align="left" width="50%"><em>${questions.value}</em></td>
 				</tr>
 			</c:forEach>
 		</c:if>

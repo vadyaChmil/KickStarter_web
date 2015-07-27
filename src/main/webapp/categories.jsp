@@ -9,14 +9,13 @@
 <title>Home page</title>
 </head>
 
-<body>
-
+<body background="images/background.png">
+	
 	<table width="80%" height="150" border="0" align="center">
 		<tr>
 			<th align="left" width="20%">
 				<h4>
-					<a href="https://github.com/vadyaChmil/KickStarter_web"
-						target="_blank" title="GitHub source"> GitHub source</a>
+					<a href="index.html">Home</a>
 				</h4>
 			</th>
 			<th align="right">

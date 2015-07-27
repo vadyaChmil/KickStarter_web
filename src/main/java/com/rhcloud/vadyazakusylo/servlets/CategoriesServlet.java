@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.rhcloud.vadyazakusylo.entity.Category;
 import com.rhcloud.vadyazakusylo.entity.Quote;
 
-public class HomePageServlet extends HttpKickStarter {
+public class CategoriesServlet extends HttpKickStarter {
 
 	/**
 	 * Vadya Zakusylo
@@ -26,7 +26,7 @@ public class HomePageServlet extends HttpKickStarter {
 
 			List<Category> categories = categoriesDao.getCategoriesList();
 			request.setAttribute(CATEGORIES, categories);
-			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+			request.getRequestDispatcher(CATEGORIES_PAGE).forward(request, response);
 		} catch (Exception e) {
 			String errorMessage = e.getMessage();
 			request.setAttribute(ERROR_MESSAGE, errorMessage);

@@ -20,8 +20,8 @@
 	</listener>
 
 	<servlet>
-		<servlet-name>HomePage</servlet-name>
-		<servlet-class>com.rhcloud.vadyazakusylo.servlets.HomePageServlet
+		<servlet-name>Categories</servlet-name>
+		<servlet-class>com.rhcloud.vadyazakusylo.servlets.CategoriesServlet
 		</servlet-class>
 	</servlet>
 	<servlet>
@@ -46,12 +46,8 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>HomePage</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>HomePage</servlet-name>
-		<url-pattern>/home</url-pattern>
+		<servlet-name>Categories</servlet-name>
+		<url-pattern>/categories</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Category</servlet-name>
