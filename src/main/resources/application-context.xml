@@ -17,12 +17,12 @@
 		<property name="password" value="${password}" />
 	</bean>
 
-	<bean id="quotesDao" class="com.rhcloud.vadyazakusylo.dao_sql.QuotesDaoMySql" />
+	<bean id="quotesDao" class="com.rhcloud.vadyazakusylo.dao_sql.QuotesDaoSql" />
 
-	<bean id="categoriesDao" class="com.rhcloud.vadyazakusylo.dao_sql.CategoriesDaoMySql" />
+	<bean id="categoriesDao" class="com.rhcloud.vadyazakusylo.dao_sql.CategoriesDaoSql" />
 
-	<bean id="projectsDao" class="com.rhcloud.vadyazakusylo.dao_sql.ProjectsDaoMySql" />
+	<bean id="projectsDao" class="com.rhcloud.vadyazakusylo.dao_sql.ProjectsDaoSql" />
 
-	<bean id="projectDao" class="com.rhcloud.vadyazakusylo.dao_sql.ProjectDaoMySql" />
+	<bean id="projectDao" class="com.rhcloud.vadyazakusylo.dao_sql.ProjectDaoSql" />
 
 </beans>

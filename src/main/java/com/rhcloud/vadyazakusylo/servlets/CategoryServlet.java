@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rhcloud.vadyazakusylo.entity.Project;
 import com.rhcloud.vadyazakusylo.entity.Quote;
-import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
 
 public class CategoryServlet extends HttpKickStarter {
 
@@ -25,11 +24,11 @@ public class CategoryServlet extends HttpKickStarter {
 			Quote quote = getQuote();
 			request.setAttribute(QUOTE, quote);
 
-			int categoryId = Integer.valueOf(request.getParameter("id"));
+			int categoryId = Integer.valueOf(request.getParameter(ID));
 			List<Project> projects = projectsDao.getProjectsList(categoryId);
 			request.setAttribute(PROJECTS, projects);
 			request.getRequestDispatcher(CATEGORY_PAGE).forward(request, response);
-		} catch (SqlConnectionException e) {
+		} catch (Exception e) {
 			String errorMessage = e.getMessage();
 			request.setAttribute(ERROR_MESSAGE, errorMessage);
 			request.getRequestDispatcher(ERROR_PAGE).forward(request, response);

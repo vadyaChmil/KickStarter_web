@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 
 import com.rhcloud.vadyazakusylo.dao.QuotesDao;
 import com.rhcloud.vadyazakusylo.entity.Quote;
-import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
+import com.rhcloud.vadyazakusylo.exception.DaoSQLException;
 
 @Component
-public class QuotesDaoMySql extends AbstractDao implements QuotesDao {
+public class QuotesDaoSql extends AbstractDao implements QuotesDao {
 
 	@Override
-	public List<Quote> getQuotesList() throws SqlConnectionException {
+	public List<Quote> getQuotesList() {
 		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectQuotes());
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -31,7 +31,8 @@ public class QuotesDaoMySql extends AbstractDao implements QuotesDao {
 			}
 			return quotes;
 		} catch (SQLException e) {
-			throw new SqlConnectionException("Problem with connecting to DataBase");
+			throw new DaoSQLException("Problem with getting Quote. "
+					+ "Error " + e.getErrorCode() + " " + e.getSQLState());
 		}
 	}
 

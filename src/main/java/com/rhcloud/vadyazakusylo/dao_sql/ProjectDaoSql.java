@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 
 import com.rhcloud.vadyazakusylo.dao.ProjectDao;
 import com.rhcloud.vadyazakusylo.entity.Project;
-import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
+import com.rhcloud.vadyazakusylo.exception.DaoSQLException;
 
 @Component
-public class ProjectDaoMySql extends AbstractDao implements ProjectDao {
+public class ProjectDaoSql extends AbstractDao implements ProjectDao {
 
 	@Override
-	public Project getProject(int projectId) throws SqlConnectionException {
+	public Project getProject(int projectId) {
 		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectProject());
 			preparedStatement.setInt(1, projectId);
@@ -39,7 +39,8 @@ public class ProjectDaoMySql extends AbstractDao implements ProjectDao {
 			}
 			return project;
 		} catch (SQLException e) {
-			throw new SqlConnectionException("Problem with connecting to DataBase");
+			throw new DaoSQLException("Problem with getting Project. "
+					+ "Error " + e.getErrorCode() + " " + e.getSQLState());
 		}
 	}
 
@@ -51,15 +52,12 @@ public class ProjectDaoMySql extends AbstractDao implements ProjectDao {
 		return sql.toString();
 	}
 
-	private Map<String, String> getQuestionsMap(int projectId) throws SqlConnectionException {
+	private Map<String, String> getQuestionsMap(int projectId) {
 		Map<String, String> questions = new TreeMap<String, String>();
 		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectQuestions());
 			preparedStatement.setInt(1, projectId);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if (resultSet == null) {
-				return null;
-			}
 			while (resultSet.next()) {
 				String question = resultSet.getString("question");
 				String answer = resultSet.getString("answer");
@@ -67,7 +65,8 @@ public class ProjectDaoMySql extends AbstractDao implements ProjectDao {
 			}
 			return questions;
 		} catch (SQLException e) {
-			throw new SqlConnectionException("Problem with connecting to DataBase");
+			throw new DaoSQLException("Problem with getting Project. "
+					+ "Error " + e.getErrorCode() + " " + e.getSQLState());
 		}
 	}
 
@@ -79,15 +78,12 @@ public class ProjectDaoMySql extends AbstractDao implements ProjectDao {
 	}
 
 	@Override
-	public Map<Integer, String> getDonatios(int projectId) throws SqlConnectionException {
+	public Map<Integer, String> getDonations(int projectId) {
 		Map<Integer, String> donations = new TreeMap<Integer, String>();
 		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectDonations());
 			preparedStatement.setInt(1, projectId);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if (resultSet == null) {
-				return null;
-			}
 			while (resultSet.next()) {
 				Integer money = resultSet.getInt("money");
 				String pledge = resultSet.getString("pledge");
@@ -95,7 +91,8 @@ public class ProjectDaoMySql extends AbstractDao implements ProjectDao {
 			}
 			return donations;
 		} catch (SQLException e) {
-			throw new SqlConnectionException("Problem with connecting to DataBase");
+			throw new DaoSQLException("Problem with getting Pledges. "
+					+ "Error " + e.getErrorCode() + " " + e.getSQLState());
 		}
 	}
 
@@ -106,14 +103,15 @@ public class ProjectDaoMySql extends AbstractDao implements ProjectDao {
 		return sql.toString();
 	}
 
-	public double getCurrenMoney(int projectId) throws SqlConnectionException {
+	public double getCurrenMoney(int projectId) {
 		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectCurrentMoney());
 			preparedStatement.setInt(1, projectId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			return resultSet.getInt("current_money");
 		} catch (SQLException e) {
-			throw new SqlConnectionException("Problem with connecting to DataBase 003");
+			throw new DaoSQLException("Problem with operation of donation. "
+					+ "Error " + e.getErrorCode() + " " + e.getSQLState());
 		}
 	}
 
@@ -125,41 +123,41 @@ public class ProjectDaoMySql extends AbstractDao implements ProjectDao {
 	}
 
 	@Override
-	public void setCurrentMoney(int money, int projectId) throws SqlConnectionException {
+	public void setCurrentMoney(int money, int projectId) {
 		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(updateCurrentMoney());
 			preparedStatement.setInt(1, money);
 			preparedStatement.setInt(2, projectId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			throw new SqlConnectionException("Problem with connecting to DataBase  004");
+			throw new DaoSQLException("Problem with operation of donation. "
+					+ "Error " + e.getErrorCode() + " " + e.getSQLState());
 		}
 	}
 
 	private String updateCurrentMoney() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("update projects ");
-		sql.append("set current_money = ? ");
+		sql.append("update projects set current_money = ? ");
 		sql.append("where id = ?;");
 		return sql.toString();
 	}
 
 	@Override
-	public void setQuestion(String question, int projectId) throws SqlConnectionException {
+	public void setQuestion(String question, int projectId) {
 		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(insertQuestion());
 			preparedStatement.setString(1, question);
 			preparedStatement.setInt(2, projectId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			throw new SqlConnectionException("Problem with connecting to DataBase 005");
+			throw new DaoSQLException("Problem with operation of asking question. "
+					+ "Error " + e.getErrorCode() + " " + e.getSQLState());
 		}
 	}
 
 	private String insertQuestion() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("insert into questions ");
-		sql.append("(question, id_project) ");
+		sql.append("insert into questions (question, id_project) ");
 		sql.append("values (?, ?);");
 		return sql.toString();
 	}

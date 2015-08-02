@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rhcloud.vadyazakusylo.entity.Project;
 import com.rhcloud.vadyazakusylo.entity.Quote;
-import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
 
 public class DonateServlet extends HttpKickStarter {
 
@@ -27,19 +26,19 @@ public class DonateServlet extends HttpKickStarter {
 
 			Project project = (Project) request.getSession().getAttribute(PROJECT);
 
-			if (request.getParameter("money") == "") {
-				Map<Integer, String> donations = projectDao.getDonatios(project.getId());
-				request.setAttribute("projectId", project.getId());
+			if (request.getParameter(MONEY) == "") {
+				Map<Integer, String> donations = projectDao.getDonations(project.getId());
+				request.setAttribute(PROJECT_ID, project.getId());
 				request.setAttribute(DONATIONS, donations);
 				request.getRequestDispatcher(DONATION_PAGE).forward(request, response);
 			} else {
-				int money = Integer.valueOf(request.getParameter("money"));
+				int money = Integer.valueOf(request.getParameter(MONEY));
 				projectDao.setCurrentMoney(money + project.getCurrentMoney(), project.getId());
 				project = projectDao.getProject(project.getId());
 				request.getSession().setAttribute(PROJECT, project);
 				request.getRequestDispatcher(PROJECT_PAGE).forward(request, response);
 			}
-		} catch (SqlConnectionException e) {
+		} catch (Exception e) {
 			String errorMessage = e.getMessage();
 			request.setAttribute(ERROR_MESSAGE, errorMessage);
 			request.getRequestDispatcher(ERROR_PAGE).forward(request, response);

@@ -14,7 +14,7 @@ import com.rhcloud.vadyazakusylo.dao.ProjectDao;
 import com.rhcloud.vadyazakusylo.dao.ProjectsDao;
 import com.rhcloud.vadyazakusylo.dao.QuotesDao;
 import com.rhcloud.vadyazakusylo.entity.Quote;
-import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
+import com.rhcloud.vadyazakusylo.exception.DaoSQLException;
 
 @Controller
 public abstract class HttpKickStarter extends HttpServlet {
@@ -25,10 +25,13 @@ public abstract class HttpKickStarter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	static final String QUOTE = "quote";
+	static final String ID = "id";
 	static final String CATEGORIES = "categories";
 	static final String PROJECTS = "projects";
+	static final String PROJECT_ID = "projectId";
 	static final String PROJECT = "project";
 	static final String DONATIONS = "donations";
+	static final String MONEY = "money";
 	static final String ERROR_MESSAGE = "errorMessage";
 
 	static final String CATEGORIES_PAGE = "categories.jsp";
@@ -55,13 +58,13 @@ public abstract class HttpKickStarter extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
 	}
 
-	Quote getQuote() throws SqlConnectionException {
+	Quote getQuote() {
 		try {
 			List<Quote> quotesList = quotesDao.getQuotesList();
 			Quote quote = quotesList.get((int) Math.round((Math.random() * (quotesList.size() - 1))));
 			return quote;
-		} catch (SqlConnectionException e) {
-			throw new SqlConnectionException("Problem with connecting to DataBase");
+		} catch (Exception e) {
+			throw new DaoSQLException(e.getMessage());
 		}
 	}
 }

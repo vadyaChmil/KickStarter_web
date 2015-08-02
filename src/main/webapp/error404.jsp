@@ -12,7 +12,7 @@
 				<h1>A 404 error has occurred</h1>
 				<p>We apologize, but the page you have specified cannot be found</p>
 				<p>
-					You can try go to <a href="home">Home page</a>
+					You can try go to <a href="index.html">Home</a>
 				</p>
 			</td>
 		</tr>

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rhcloud.vadyazakusylo.entity.Project;
 import com.rhcloud.vadyazakusylo.entity.Quote;
-import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
 
 public class ProjectServlet extends HttpKickStarter {
 
@@ -26,7 +25,7 @@ public class ProjectServlet extends HttpKickStarter {
 
 			String text = request.getParameter("text");
 			if (text == null) {
-				int projectId = Integer.valueOf(request.getParameter("id"));
+				int projectId = Integer.valueOf(request.getParameter(ID));
 				Project project = projectDao.getProject(projectId);
 				request.getSession().setAttribute(PROJECT, project);
 				request.getRequestDispatcher(PROJECT_PAGE).forward(request, response);
@@ -37,7 +36,7 @@ public class ProjectServlet extends HttpKickStarter {
 				request.getSession().setAttribute(PROJECT, project);
 				request.getRequestDispatcher(PROJECT_PAGE).forward(request, response);
 			}
-		} catch (SqlConnectionException e) {
+		} catch (Exception e) {
 			String errorMessage = e.getMessage();
 			request.setAttribute(ERROR_MESSAGE, errorMessage);
 			request.getRequestDispatcher(ERROR_PAGE).forward(request, response);

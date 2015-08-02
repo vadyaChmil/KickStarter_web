@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 
 import com.rhcloud.vadyazakusylo.dao.ProjectsDao;
 import com.rhcloud.vadyazakusylo.entity.Project;
-import com.rhcloud.vadyazakusylo.exception.SqlConnectionException;
+import com.rhcloud.vadyazakusylo.exception.DaoSQLException;
 
 @Component
-public class ProjectsDaoMySql extends AbstractDao implements ProjectsDao {
+public class ProjectsDaoSql extends AbstractDao implements ProjectsDao {
 
 	@Override
-	public List<Project> getProjectsList(int categoryId) throws SqlConnectionException {
+	public List<Project> getProjectsList(int categoryId) {
 		try (Connection connection = getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectProjects());
 			preparedStatement.setInt(1, categoryId);
@@ -34,7 +34,8 @@ public class ProjectsDaoMySql extends AbstractDao implements ProjectsDao {
 			}
 			return projects;
 		} catch (SQLException e) {
-			throw new SqlConnectionException("Problem with connecting to DataBase");
+			throw new DaoSQLException("Problem with getting Projects. "
+					+ "Error " + e.getErrorCode() + " " + e.getSQLState());
 		}
 	}
 
