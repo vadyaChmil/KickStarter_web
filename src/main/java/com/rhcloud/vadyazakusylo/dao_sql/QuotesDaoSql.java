@@ -25,8 +25,8 @@ public class QuotesDaoSql extends AbstractDao implements QuotesDao {
 			String quote;
 			String autor;
 			while (resultSet.next()) {
-				quote = resultSet.getString("quotes.quote");
-				autor = resultSet.getString("autors.autor");
+				quote = resultSet.getString("quote.text");
+				autor = resultSet.getString("autor.name");
 				quotes.add(new Quote(quote, autor));
 			}
 			return quotes;
@@ -38,8 +38,8 @@ public class QuotesDaoSql extends AbstractDao implements QuotesDao {
 
 	private String selectQuotes() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select quotes.quote, autors.autor ");
-		sql.append("from quotes natural join autors;");
+		sql.append("select quote.text, autor.name ");
+		sql.append("from quote natural join autor;");
 		return sql.toString();
 	}
 }

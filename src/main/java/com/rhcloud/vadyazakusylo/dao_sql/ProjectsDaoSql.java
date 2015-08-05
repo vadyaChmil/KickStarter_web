@@ -25,7 +25,7 @@ public class ProjectsDaoSql extends AbstractDao implements ProjectsDao {
 			List<Project> projects = new ArrayList<Project>();
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
-				String name = resultSet.getString("project");
+				String name = resultSet.getString("name");
 				int needMoney = resultSet.getInt("need_money");
 				int currentMoney = resultSet.getInt("current_money");
 				int daysLeft = resultSet.getInt("days_left");
@@ -41,9 +41,9 @@ public class ProjectsDaoSql extends AbstractDao implements ProjectsDao {
 
 	private String selectProjects() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select id, project, need_money, current_money, ");
+		sql.append("select id, name, need_money, current_money, ");
 		sql.append("days_left, description ");
-		sql.append("from projects where id_category = ?;");
+		sql.append("from project where id_category = ?;");
 		return sql.toString();
 	}
 }

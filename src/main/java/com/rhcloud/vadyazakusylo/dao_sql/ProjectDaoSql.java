@@ -25,7 +25,7 @@ public class ProjectDaoSql extends AbstractDao implements ProjectDao {
 			Project project = null;
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
-				String name = resultSet.getString("project");
+				String name = resultSet.getString("name");
 				int needMoney = resultSet.getInt("need_money");
 				int currentMoney = resultSet.getInt("current_money");
 				int daysLeft = resultSet.getInt("days_left");
@@ -46,9 +46,9 @@ public class ProjectDaoSql extends AbstractDao implements ProjectDao {
 
 	private String selectProject() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select id, project, need_money, current_money, ");
+		sql.append("select id, name, need_money, current_money, ");
 		sql.append("days_left, history, description, url_video, id_category ");
-		sql.append("from projects where id = ?;");
+		sql.append("from project where id = ?;");
 		return sql.toString();
 	}
 
@@ -72,7 +72,7 @@ public class ProjectDaoSql extends AbstractDao implements ProjectDao {
 
 	private String selectQuestions() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select question, answer from questions ");
+		sql.append("select question, answer from question ");
 		sql.append("where id_project = ?;");
 		return sql.toString();
 	}
@@ -98,7 +98,7 @@ public class ProjectDaoSql extends AbstractDao implements ProjectDao {
 
 	private String selectDonations() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select money, pledge, id_project from donations ");
+		sql.append("select money, pledge, id_project from donation ");
 		sql.append("where id_project = ?;");
 		return sql.toString();
 	}
@@ -117,7 +117,7 @@ public class ProjectDaoSql extends AbstractDao implements ProjectDao {
 
 	private String selectCurrentMoney() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select current_money from projects ");
+		sql.append("select current_money from project ");
 		sql.append("where id = ?;");
 		return sql.toString();
 	}
@@ -137,7 +137,7 @@ public class ProjectDaoSql extends AbstractDao implements ProjectDao {
 
 	private String updateCurrentMoney() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("update projects set current_money = ? ");
+		sql.append("update project set current_money = ? ");
 		sql.append("where id = ?;");
 		return sql.toString();
 	}
@@ -157,7 +157,7 @@ public class ProjectDaoSql extends AbstractDao implements ProjectDao {
 
 	private String insertQuestion() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("insert into questions (question, id_project) ");
+		sql.append("insert into question (question, id_project) ");
 		sql.append("values (?, ?);");
 		return sql.toString();
 	}

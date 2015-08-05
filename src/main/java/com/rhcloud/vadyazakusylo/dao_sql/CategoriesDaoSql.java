@@ -16,7 +16,7 @@ import com.rhcloud.vadyazakusylo.exception.DaoSQLException;
 @Component
 public class CategoriesDaoSql extends AbstractDao implements CategoriesDao {
 
-	private final String SELECT_FROM_CATEGORIES = "select id, category from categories;";
+	private final String SELECT_FROM_CATEGORIES = "select id, name from category;";
 
 	@Override
 	public List<Category> getCategoriesList() {
@@ -26,7 +26,7 @@ public class CategoriesDaoSql extends AbstractDao implements CategoriesDao {
 			List<Category> categories = new ArrayList<Category>();
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
-				String name = resultSet.getString("category");
+				String name = resultSet.getString("name");
 				categories.add(new Category(id, name));
 			}
 			return categories;
