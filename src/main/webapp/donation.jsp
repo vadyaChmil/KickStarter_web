@@ -38,7 +38,7 @@
 	<table width="80%" border="0" align="center">
 		<tr>
 			<th width="50%" align="left">
-				<form name="form" method="get" action="donate">
+				<form name="form" method="post" action="donate">
 					<p>Input name:</p>
 						<label><input type="text" name="name" size="30"></label>
 					<p>Input card number:</p>
